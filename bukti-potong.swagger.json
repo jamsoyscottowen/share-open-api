@@ -1,0 +1,227 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Bukti Potong 1721-A1 API",
+    "version": "v1"
+  },
+  "paths": {
+    "/Admin/Tahuns": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "operationId": "adminTahunsGet",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Admin/Karyawans/{tahun}": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "operationId": "adminKaryawansGet",
+        "parameters": [
+          {
+            "name": "tahun",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KaryawanResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Admin/Download/{tahun}/{nipas}": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "operationId": "adminDownloadGet",
+        "parameters": [
+          {
+            "name": "tahun",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "nipas",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {
+              "Content-Disposition": {
+                "description": "Content Disposition",
+                "schema": {
+                  "type": "string",
+                  "description": "Content Disposition",
+                  "format": ""
+                }
+              }
+            },
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/General/Role": {
+      "get": {
+        "tags": [
+          "General"
+        ],
+        "operationId": "generalRoleGet",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/General/Tahuns": {
+      "get": {
+        "tags": [
+          "General"
+        ],
+        "operationId": "generalTahunsGet",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/General/Download/{tahun}": {
+      "get": {
+        "tags": [
+          "General"
+        ],
+        "operationId": "generalDownloadGet",
+        "parameters": [
+          {
+            "name": "tahun",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "KaryawanResponse": {
+        "type": "object",
+        "properties": {
+          "nipas": {
+            "type": "string",
+            "nullable": true
+          },
+          "nama": {
+            "type": "string",
+            "nullable": true
+          },
+          "jabatan": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoleResponse": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
