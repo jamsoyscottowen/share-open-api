@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.4",
   "info": {
     "title": "Bukti Potong 1721-A1 API",
     "version": "v1"
@@ -13,7 +13,7 @@
         "operationId": "adminTahunsGet",
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -39,7 +39,6 @@
             "name": "tahun",
             "in": "path",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -48,7 +47,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -74,7 +73,6 @@
             "name": "tahun",
             "in": "path",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -84,7 +82,6 @@
             "name": "nipas",
             "in": "path",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "string"
             }
@@ -92,17 +89,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
-            "headers": {
-              "Content-Disposition": {
-                "description": "Content Disposition",
-                "schema": {
-                  "type": "string",
-                  "description": "Content Disposition",
-                  "format": ""
-                }
-              }
-            },
+            "description": "OK",
             "content": {
               "application/pdf": {
                 "schema": {
@@ -123,7 +110,7 @@
         "operationId": "generalRoleGet",
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -143,7 +130,7 @@
         "operationId": "generalTahunsGet",
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -169,7 +156,6 @@
             "name": "tahun",
             "in": "path",
             "required": true,
-            "style": "simple",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -178,7 +164,90 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Peserta/Search/{tahun}/{nik}": {
+      "get": {
+        "tags": [
+          "Peserta"
+        ],
+        "operationId": "pesertaSearchGet",
+        "parameters": [
+          {
+            "name": "tahun",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "nik",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PesertaResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Peserta/Download/{tahun}/{id}": {
+      "get": {
+        "tags": [
+          "Peserta"
+        ],
+        "operationId": "pesertaDownloadGet",
+        "parameters": [
+          {
+            "name": "tahun",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "content": {
               "application/pdf": {
                 "schema": {
@@ -212,6 +281,24 @@
         },
         "additionalProperties": false
       },
+      "PesertaResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nik": {
+            "type": "string",
+            "nullable": true
+          },
+          "nama": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "RoleResponse": {
         "type": "object",
         "properties": {
@@ -223,5 +310,16 @@
         "additionalProperties": false
       }
     }
-  }
+  },
+  "tags": [
+    {
+      "name": "Admin"
+    },
+    {
+      "name": "General"
+    },
+    {
+      "name": "Peserta"
+    }
+  ]
 }
