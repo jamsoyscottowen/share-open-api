@@ -250,6 +250,37 @@
                 "x-auth-type": "None"
             }
         },
+        "/Peserta/Tahuns": {
+            "get": {
+                "tags": [
+                    "Peserta"
+                ],
+                "operationId": "pesertaTahunsGet",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer",
+                                        "format": "int32"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ],
+                "x-throttling-tier": "Unlimited",
+                "x-auth-type": "None"
+            }
+        },
         "/Peserta/Search/{tahun}/{nik}": {
             "get": {
                 "tags": [
