@@ -1,0 +1,558 @@
+{
+    "openapi": "3.0.4",
+    "info": {
+        "title": "Bupot",
+        "description": "Bukti Potong Pajak API",
+        "contact": {
+            "email": "galih.mukti@asabri.co.id"
+        },
+        "version": "v1"
+    },
+    "servers": [
+        {
+            "url": "https://aws.asabri.co.id:8244/bupot/v1"
+        }
+    ],
+    "security": [
+        {
+            "default": []
+        }
+    ],
+    "tags": [
+        {
+            "name": "Admin"
+        },
+        {
+            "name": "Karyawan"
+        },
+        {
+            "name": "Peserta"
+        },
+        {
+            "name": "PesertaOld"
+        }
+    ],
+    "paths": {
+        "/Admin/Tahuns": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "operationId": "adminTahunsGet",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ],
+                "x-throttling-tier": "Unlimited",
+                "x-auth-type": "None"
+            }
+        },
+        "/Admin/Karyawans/{tahun}": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "operationId": "adminKaryawansGet",
+                "parameters": [
+                    {
+                        "name": "tahun",
+                        "in": "path",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/KaryawanResponse"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ],
+                "x-throttling-tier": "Unlimited",
+                "x-auth-type": "None"
+            }
+        },
+        "/Admin/Download/{tahun}/{nipas}": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "operationId": "adminDownloadGet",
+                "parameters": [
+                    {
+                        "name": "tahun",
+                        "in": "path",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "nipas",
+                        "in": "path",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/pdf": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ],
+                "x-throttling-tier": "Unlimited",
+                "x-auth-type": "None"
+            }
+        },
+        "/Karyawan/Role": {
+            "get": {
+                "tags": [
+                    "Karyawan"
+                ],
+                "operationId": "karyawanRoleGet",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RoleResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ],
+                "x-throttling-tier": "Unlimited",
+                "x-auth-type": "None"
+            }
+        },
+        "/Karyawan/Tahuns": {
+            "get": {
+                "tags": [
+                    "Karyawan"
+                ],
+                "operationId": "karyawanTahunsGet",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ],
+                "x-throttling-tier": "Unlimited",
+                "x-auth-type": "None"
+            }
+        },
+        "/Karyawan/Download/{tahun}": {
+            "get": {
+                "tags": [
+                    "Karyawan"
+                ],
+                "operationId": "karyawanDownloadGet",
+                "parameters": [
+                    {
+                        "name": "tahun",
+                        "in": "path",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/pdf": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ],
+                "x-throttling-tier": "Unlimited",
+                "x-auth-type": "None"
+            }
+        },
+        "/Peserta/Search/{tahun}/{nik}": {
+            "get": {
+                "tags": [
+                    "Peserta"
+                ],
+                "operationId": "pesertaSearchGet",
+                "parameters": [
+                    {
+                        "name": "tahun",
+                        "in": "path",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "maximum": 2025,
+                            "minimum": 2024,
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "nik",
+                        "in": "path",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "pattern": "^\\d{16}$",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PesertaResponse"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ],
+                "x-throttling-tier": "Unlimited",
+                "x-auth-type": "None"
+            }
+        },
+        "/Peserta/Download/{tahun}/{id}": {
+            "get": {
+                "tags": [
+                    "Peserta"
+                ],
+                "operationId": "pesertaDownloadGet",
+                "parameters": [
+                    {
+                        "name": "tahun",
+                        "in": "path",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "maximum": 2025,
+                            "minimum": 2024,
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/pdf": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ],
+                "x-throttling-tier": "Unlimited",
+                "x-auth-type": "None"
+            }
+        },
+        "/PesertaOld/Search/{tahun}/{nrpNip}": {
+            "get": {
+                "tags": [
+                    "PesertaOld"
+                ],
+                "operationId": "pesertaOldSearchGet",
+                "parameters": [
+                    {
+                        "name": "tahun",
+                        "in": "path",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "maximum": 2023,
+                            "minimum": 2009,
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "nrpNip",
+                        "in": "path",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "pattern": "^(?=.{5,18}$)\\d+(/[Pp])?$",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PesertaOldResponse"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ],
+                "x-throttling-tier": "Unlimited",
+                "x-auth-type": "None"
+            }
+        },
+        "/PesertaOld/Download/{tahun}/{nopens}": {
+            "get": {
+                "tags": [
+                    "PesertaOld"
+                ],
+                "operationId": "pesertaOldDownloadGet",
+                "parameters": [
+                    {
+                        "name": "tahun",
+                        "in": "path",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "maximum": 2023,
+                            "minimum": 2009,
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "nopens",
+                        "in": "path",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "pattern": "^(([a-zA-Z0-9]){12}|([a-zA-Z0-9]){14})$",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/pdf": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "default": []
+                    }
+                ],
+                "x-throttling-tier": "Unlimited",
+                "x-auth-type": "None"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "KaryawanResponse": {
+                "type": "object",
+                "properties": {
+                    "nipas": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "nama": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "jabatan": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "PesertaOldResponse": {
+                "type": "object",
+                "properties": {
+                    "NRP_NIP": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "NOPENS": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "NAMA_PENERIMA": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "PesertaResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "nik": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "nama": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "RoleResponse": {
+                "type": "object",
+                "properties": {
+                    "role": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "securitySchemes": {
+            "default": {
+                "type": "oauth2",
+                "flows": {
+                    "implicit": {
+                        "authorizationUrl": "https://aws.asabri.co.id:8244/authorize",
+                        "scopes": {}
+                    }
+                }
+            }
+        }
+    }
+}
