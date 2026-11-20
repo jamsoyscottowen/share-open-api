@@ -8,11 +8,6 @@
         },
         "version": "v1"
     },
-    "servers": [
-        {
-            "url": "https://aws.asabri.co.id:8244/bupot/v1"
-        }
-    ],
     "security": [
         {
             "default": []
